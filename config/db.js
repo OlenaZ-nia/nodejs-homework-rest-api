@@ -10,7 +10,7 @@ const db =  mongoose.connect(uri, {
 });
 
 mongoose.connection.on('connected', () => {
-  console.log('Database connection successful');
+  console.log('Database connection successful'.bgBrightMagenta);
 })
 
 mongoose.connection.on('error', (err) => {

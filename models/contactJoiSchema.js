@@ -7,6 +7,7 @@ const contactJoiSchema = Joi.object({
   email: Joi.string().email().required(),
   phone: Joi.string().pattern(/\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}/, 'numbers').required(),
   favorite: Joi.boolean(),
+  owner:Joi.objectId(),
 })
   .messages({
   'any.required': 'missing required name field {{#label}}',
@@ -26,6 +27,12 @@ const schemaUpdateStatus = Joi.object({
   'any.required': 'missing field {{#label}}',
 })
 
-module.exports = { contactJoiSchema, schemaMongoId, schemaUpdateStatus }
+const schemaQuery = Joi.object({
+  favorite: Joi.boolean().valid(true),
+  limit: Joi.number(),
+  page: Joi.number(),
+})
+
+module.exports = { contactJoiSchema, schemaMongoId, schemaUpdateStatus, schemaQuery }
 
 
