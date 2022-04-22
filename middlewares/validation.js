@@ -22,4 +22,16 @@ const validateParams = (schema) => async (req, res, next) => {
   }
 }
 
-module.exports = { validateBody, validateParams }
+const validateQuery = (schema) => async (req, res, next) => {
+  try {
+    await schema.validateAsync(req.query)
+    next()
+  } catch (err) {
+    console.log(err.details)
+    return res
+      .status(400)
+      .json({ status: 'error', code: 400, message: err.message })
+  }
+}
+
+module.exports = { validateBody, validateParams, validateQuery }
