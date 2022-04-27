@@ -17,6 +17,7 @@ app.use(limiter(15 * 60 * 1000, 100)); // Apply the rate limiting middleware to 
 app.use(helmet());
 
 app.use(logger(formatsLogger));
+app.use(express.static(process.env.STATIC_FOLDER));
 app.use(cors());
 app.use(express.json({limit: MaxReqBodySize.LIMIT}));
 

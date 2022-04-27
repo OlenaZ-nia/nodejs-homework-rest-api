@@ -1,12 +1,15 @@
+const {mkdir } = require('fs/promises');
 const app = require('./app');
 const db = require('./config/db');
 const colors = require('colors');
+require('dotenv').config();
 const { AppErrorCode } = require('./libs');
 
 const { PORT } = process.env || 3000;
 
 db.then(() => {
-  app.listen(PORT, () => {
+  app.listen(PORT, async () => {
+    await mkdir(process.env.UPLOAD_FOLDER, {recursive: true})
     console.log(`Server running. Use our API on port: ${PORT}`.blue);
   })
 }).catch(err => {

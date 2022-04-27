@@ -1,10 +1,12 @@
 const Joi = require('joi')
 
 const userJoiSchema = Joi.object({
-    password: Joi.string().pattern(/^[a-zA-Z0-9]{6,}$/, 'password').required(),
-    email: Joi.string().email().required(),
-    subscription: Joi.string().valid('starter', 'pro', 'business'),
-    token: Joi.string(),
+  password: Joi.string().pattern(/^[a-zA-Z0-9]{6,}$/, 'password').required(),
+  email: Joi.string().email().required(),
+  subscription: Joi.string().valid('starter', 'pro', 'business'),
+  token: Joi.string(),
+  avatarURL: Joi.string(),
+  // cloudId: Joi.string(),
 })
   .messages({
   'any.required': 'missing required name field {{#label}}',

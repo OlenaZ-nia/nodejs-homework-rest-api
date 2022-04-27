@@ -20,4 +20,6 @@ const MaxReqBodySize = {
   LIMIT: 10000,
 }
 
-module.exports = { HttpCode, Role, MaxReqBodySize }
+const FOLDER_CLOUD_AVATAR = 'avatars';
+
+module.exports = { HttpCode, Role, MaxReqBodySize, FOLDER_CLOUD_AVATAR }
