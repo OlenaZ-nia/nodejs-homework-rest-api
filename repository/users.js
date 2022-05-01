@@ -26,4 +26,12 @@ const update = async (id, body) => {
     return result
 }
 
-module.exports = { findById, findByEmail, create, updateToken, update }
+// const updateAvatar = async (id, avatar, cloudId = null) => {
+//   return await User.findByIdAndUpdate(id, { avatar, cloudId })
+// }
+const updateAvatar = async (id, avatar) => {
+  return await User.findByIdAndUpdate(id, { avatar })
+}
+
+
+module.exports = { findById, findByEmail, create, updateToken, update, updateAvatar }

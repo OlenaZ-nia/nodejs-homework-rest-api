@@ -11,11 +11,13 @@ class AuthService {
       if (user) {
           throw new HttpError(HttpCode.CONFLICT, 'Email in use');
       }
-      const newUser = await Users.create(body);
+        const newUser = await Users.create(body);
+        
       return {
           id: newUser.id,
           email: newUser.email,
           subscription: newUser.subscription,
+          avatarURL: newUser.avatarURL,
         }
     }
 
@@ -52,7 +54,7 @@ class AuthService {
 
     generateToken(user) {
         const payload = { id: user.id, email: user.email, subscription: user.subscription };
-        const token = jwt.sign(payload, SECRET_KEY, { expiresIn: '1h' });
+        const token = jwt.sign(payload, SECRET_KEY, { expiresIn: '2h' });
         return token;
     }
 }

@@ -1,30 +1,41 @@
 const mongoose = require ('mongoose');
 const { Schema, model } = mongoose;
-const bcrypt = require('bcryptjs');  
+const bcrypt = require('bcryptjs'); 
+const gravatar = require('gravatar'); 
 
 const { Role } = require('../libs');
 
 const userSchema = new Schema(
-    {
-  password: {
-    type: String,
-    required: [true, 'Password is required'],
-  },
-  email: {
-    type: String,
-    required: [true, 'Email is required'],
-    unique: true,
-  },
-  subscription: {
-    type: String,
-    enum: {values: Object.values(Role), message: 'Invalid role'},
-    default: Role.STARTER,
-  },
-  token: {
-    type: String,
-    default: null,
-  },
+  {
+    password: {
+      type: String,
+      required: [true, 'Password is required'],
     },
+    email: {
+      type: String,
+      required: [true, 'Email is required'],
+      unique: true,
+    },
+    subscription: {
+      type: String,
+      enum: { values: Object.values(Role), message: 'Invalid role' },
+      default: Role.STARTER,
+    },
+    token: {
+      type: String,
+      default: null,
+    },
+    avatarURL: {
+      type: String,
+      default: function () {
+        return gravatar.url(this.email, {s:'250'}, true)
+      }
+    },
+    // cloudId: {
+    //   type: String,
+    //   default: null
+    // },
+  },
     {
       versionKey: false,
       timestamps: true,
