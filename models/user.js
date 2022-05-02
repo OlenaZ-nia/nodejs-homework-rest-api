@@ -1,7 +1,7 @@
 const mongoose = require ('mongoose');
 const { Schema, model } = mongoose;
 const bcrypt = require('bcryptjs'); 
-const gravatar = require('gravatar'); 
+const gravatar = require('gravatar');
 
 const { Role } = require('../libs');
 
@@ -35,6 +35,14 @@ const userSchema = new Schema(
     //   type: String,
     //   default: null
     // },
+    verify: {
+      type: Boolean,
+      default: false,
+    },
+    verificationToken: {
+      type: String,
+      required: [true, 'Verify token is required'],
+    },
   },
     {
       versionKey: false,
