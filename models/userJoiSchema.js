@@ -1,12 +1,15 @@
 const Joi = require('joi')
 
 const userJoiSchema = Joi.object({
-  password: Joi.string().pattern(/^[a-zA-Z0-9]{6,}$/, 'password').required(),
+  // password: Joi.string().pattern(/^[a-zA-Z0-9]{6,}$/, 'password').required(),
+  password: Joi.string().required(),
   email: Joi.string().email().required(),
   subscription: Joi.string().valid('starter', 'pro', 'business'),
   token: Joi.string(),
   avatarURL: Joi.string(),
   // cloudId: Joi.string(),
+  verify: Joi.boolean(),
+  verificationToken: Joi.string(),
 })
   .messages({
   'any.required': 'missing required name field {{#label}}',
@@ -22,4 +25,10 @@ const schemaUpdateStatus = Joi.object({
   'any.required': 'missing field {{#label}}',
 })
 
-module.exports = { userJoiSchema, schemaUpdateStatus }
+const schemaVerifyUser = Joi.object({
+  email: Joi.string().email().required(),
+}).messages({
+  'any.required': 'missing field {{#label}}',
+})
+
+module.exports = { userJoiSchema, schemaUpdateStatus, schemaVerifyUser }
